@@ -15,4 +15,5 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+EXPOSE 9999/tcp
+ENTRYPOINT ["dotnet", "aspnetapp.dll", "http://0.0.0.0:9999"]
